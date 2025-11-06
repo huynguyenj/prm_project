@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <!-- Primary Colors - Black & White Theme -->
+    <color name="primary">#1A1A1A</color>
+    <color name="primary_dark">#000000</color>
+    <color name="primary_light">#2E2E2E</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- Background Colors -->
+    <color name="background">#FFFFFF</color>
+    <color name="background_secondary">#F5F5F5</color>
+    <color name="surface">#FAFAFA</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#1A1A1A</color>
+    <color name="text_secondary">#666666</color>
+    <color name="text_hint">#999999</color>
+    <color name="text_disabled">#CCCCCC</color>
+    <color name="text_on_dark">#FFFFFF</color>
+
+    <!-- Border & Divider -->
+    <color name="border">#E0E0E0</color>
+    <color name="divider">#EEEEEE</color>
+
+    <!-- Action Colors -->
+    <color name="accent">#1A1A1A</color>
+    <color name="accent_light">#424242</color>
+
+    <!-- Status Colors -->
+    <color name="success">#4CAF50</color>
+    <color name="success_dark">#388E3C</color>
+    <color name="warning">#FF9800</color>
+    <color name="warning_dark">#F57C00</color>
+    <color name="error">#F44336</color>
+    <color name="error_dark">#D32F2F</color>
+    <color name="info">#2196F3</color>
+    <color name="info_dark">#1976D2</color>
+
+    <!-- Button Specific Colors -->
+    <color name="button_delete">#F44336</color>
+    <color name="button_delete_pressed">#D32F2F</color>
+    <color name="button_info">#2196F3</color>
+    <color name="button_info_pressed">#1976D2</color>
+    <color name="button_edit">#FF9800</color>
+    <color name="button_edit_pressed">#F57C00</color>
+    <color name="button_success">#4CAF50</color>
+    <color name="button_success_pressed">#388E3C</color>
+    <color name="button_primary">#1A1A1A</color>
+    <color name="button_primary_pressed">#000000</color>
+
+    <!-- Gray Scale -->
+    <color name="gray_50">#FAFAFA</color>
+    <color name="gray_100">#F5F5F5</color>
+    <color name="gray_200">#EEEEEE</color>
+    <color name="gray_300">#E0E0E0</color>
+    <color name="gray_400">#BDBDBD</color>
+    <color name="gray_500">#9E9E9E</color>
+    <color name="gray_600">#757575</color>
+    <color name="gray_700">#616161</color>
+    <color name="gray_800">#424242</color>
+    <color name="gray_900">#212121</color>
+
+    <!-- Overlay -->
+    <color name="overlay_light">#1A000000</color>
+    <color name="overlay_medium">#4D000000</color>
+    <color name="overlay_dark">#80000000</color>
+
+    <!-- Link Color -->
+    <color name="link">#1A1A1A</color>
+    <color name="link_pressed">#000000</color>
+</resources>
