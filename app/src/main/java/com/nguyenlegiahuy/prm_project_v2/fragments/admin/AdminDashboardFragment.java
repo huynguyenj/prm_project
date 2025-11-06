@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.nguyenlegiahuy.prm_project_v2.R;
+import com.nguyenlegiahuy.prm_project_v2.api.AdminApiService;
 import com.nguyenlegiahuy.prm_project_v2.api.ApiClient;
 import com.nguyenlegiahuy.prm_project_v2.api.ApiService;
 import com.nguyenlegiahuy.prm_project_v2.models.admin.dashboard.TotalAgenciesResponse;
@@ -33,7 +34,7 @@ public class AdminDashboardFragment extends Fragment {
     private LinearLayout cardContainer;
     private ProgressBar progressBar;
     private TextView tvError;
-    private ApiService apiService;
+    private AdminApiService apiService;
     private SessionManager sessionManager;
 
     private static final DecimalFormat CURRENCY_FORMAT = new DecimalFormat("#,###");
@@ -52,7 +53,7 @@ public class AdminDashboardFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBar);
         tvError = view.findViewById(R.id.tvError);
 
-        apiService = ApiClient.getClient().create(ApiService.class);
+        apiService = ApiClient.getClient().create(AdminApiService.class);
         sessionManager = new SessionManager(requireContext());
 
         loadAllData();

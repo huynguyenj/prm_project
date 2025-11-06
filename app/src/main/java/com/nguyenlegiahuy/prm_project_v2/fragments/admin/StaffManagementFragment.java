@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nguyenlegiahuy.prm_project_v2.R;
 import com.nguyenlegiahuy.prm_project_v2.adapter.staff.StaffAdapter;
+import com.nguyenlegiahuy.prm_project_v2.api.AdminApiService;
 import com.nguyenlegiahuy.prm_project_v2.api.ApiClient;
 import com.nguyenlegiahuy.prm_project_v2.api.ApiService;
 import com.nguyenlegiahuy.prm_project_v2.models.admin.staff.Staff;
@@ -86,7 +87,7 @@ public class StaffManagementFragment extends Fragment {
         if (page == 1) showLoading(true);
         else adapter.addLoadingFooter();
 
-        ApiService api = ApiClient.getClient().create(ApiService.class);
+        AdminApiService api = ApiClient.getClient().create(AdminApiService.class);
         api.getStaffList(LIMIT, page).enqueue(new Callback<StaffListResponse>() {
             @Override
             public void onResponse(@NonNull Call<StaffListResponse> call,
