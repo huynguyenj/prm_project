@@ -5,19 +5,19 @@
     android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    >
+
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnCreateStaff"
+        android:id="@+id/btnCreateAgency"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:text="+ Create Staff"
+        android:text="+ Create Agency"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:icon="@android:drawable/ic_menu_add"
-        app:iconGravity="textStart"
-        app:backgroundTint="@color/button_success"
-        app:cornerRadius="8dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="@color/button_success"/>
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_gravity="center"

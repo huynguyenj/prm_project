@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/nav_home" android:title="Home"  />
-    <item android:id="@+id/nav_customers" android:title="Customers" />
-    <item android:id="@+id/nav_quotations" android:title="Quotations"  />
-    <item android:id="@+id/nav_orders" android:title="Orders"  />
+    <item android:id="@+id/nav_home_dealer" android:title="Home"  android:icon="@drawable/outline_bike_scooter_24"/>
+    <item android:id="@+id/nav_customers" android:title="Customers" android:icon="@drawable/baseline_account_box_24"/>
+    <item android:id="@+id/nav_quotations" android:title="Quotations"  android:icon="@drawable/outline_add_notes_24"/>
+    <item android:id="@+id/nav_deposit" android:title="Deposit"  android:icon="@drawable/outline_attach_money_24"/>
+    <item android:id="@+id/nav_customer_contract" android:title="Customer contract" android:icon="@drawable/outline_add_ad_24" />
+    <item android:id="@+id/nav_logout" android:title="Logout" android:icon="@drawable/outline_door_open_24"  />
+
 </menu>

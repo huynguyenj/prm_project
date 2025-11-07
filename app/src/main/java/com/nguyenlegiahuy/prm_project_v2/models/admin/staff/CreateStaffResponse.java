@@ -1,11 +1,11 @@
 package com.nguyenlegiahuy.prm_project_v2.models.admin.staff;
 
-import java.util.List;
-
-public class StaffListResponse {
+public class CreateStaffResponse {
     private int statusCode;
+
     private String message;
-    private List<Staff> data;
+
+    private Object data;
 
     public int getStatusCode() {
         return statusCode;
@@ -14,5 +14,8 @@ public class StaffListResponse {
     public String getMessage() {
         return message;
     }
-    public List<Staff> getData() { return data; }
+
+    public Object getData() {
+        return data;
+    }
 }

@@ -16,7 +16,6 @@ public class Staff {
     private int agencyId;
     private List<String> role;
 
-    // Getters & Setters
     public int getId() { return id; }
     public String getUsername() { return username; }
     public String getFullname() { return fullname; }
@@ -25,4 +24,24 @@ public class Staff {
     public String getAddress() { return address; }
     public String getAvatar() { return avatar; }
     public boolean isActive() { return isActive; }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
 }

@@ -23,11 +23,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".DealerStaffMainActivity"/>
-        <activity android:name=".EvmStaffMainActivity"/>
-        <activity android:name=".AdminMainActivity"/>
+        <activity android:name=".activities.dealer_staff.DealerStaffMainActivity"/>
+        <activity android:name=".activities.evm_staff.EvmStaffMainActivity"/>
+        <activity android:name=".activities.admin.AdminMainActivity"/>
         <activity android:name=".BaseBottomActivity"/>
-        <activity android:name=".DealerManagerMainActivity"/>
+        <activity android:name=".activities.dealer_manager.DealerManagerMainActivity"/>
+        <activity
+            android:name=".activities.admin.CreateStaffActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -17,13 +17,13 @@ import androidx.fragment.app.Fragment;
 import com.nguyenlegiahuy.prm_project_v2.R;
 import com.nguyenlegiahuy.prm_project_v2.api.AdminApiService;
 import com.nguyenlegiahuy.prm_project_v2.api.ApiClient;
-import com.nguyenlegiahuy.prm_project_v2.api.ApiService;
 import com.nguyenlegiahuy.prm_project_v2.models.admin.dashboard.TotalAgenciesResponse;
 import com.nguyenlegiahuy.prm_project_v2.models.admin.dashboard.TotalMotorbikesResponse;
 import com.nguyenlegiahuy.prm_project_v2.models.admin.dashboard.TotalWarehousesResponse;
 import com.nguyenlegiahuy.prm_project_v2.utils.SessionManager;
 
-import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,8 +37,8 @@ public class AdminDashboardFragment extends Fragment {
     private AdminApiService apiService;
     private SessionManager sessionManager;
 
-    private static final DecimalFormat CURRENCY_FORMAT = new DecimalFormat("#,###");
     private int pendingRequests = 0;
+    private final List<Call<?>> activeCalls = new ArrayList<>(); // lưu các request để cancel
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,7 +69,7 @@ public class AdminDashboardFragment extends Fragment {
     }
 
     private void requestCompleted() {
-        if (--pendingRequests <= 0) {
+        if (--pendingRequests <= 0 && isAdded()) {
             showLoading(false);
         }
     }
@@ -80,11 +80,12 @@ public class AdminDashboardFragment extends Fragment {
         apiService.getTotalAgencies().enqueue(new Callback<TotalAgenciesResponse>() {
             @Override
             public void onResponse(Call<TotalAgenciesResponse> call, Response<TotalAgenciesResponse> response) {
-                if (response.body().getData() != null) {
+                if (!isAdded()) return;
+                if (response.body().getStatusCode() == 200 && response.body().getData() != null) {
                     int count = response.body().getData().getTotalAgencies();
                     addStatCard("Total Agencies", String.valueOf(count), R.drawable.outline_assignment_globe_24);
                 } else {
-                    Toast.makeText(requireContext(), "Agencies: No data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 requestCompleted();
             }
@@ -102,11 +103,12 @@ public class AdminDashboardFragment extends Fragment {
         apiService.getTotalWarehouses().enqueue(new Callback<TotalWarehousesResponse>() {
             @Override
             public void onResponse(Call<TotalWarehousesResponse> call, Response<TotalWarehousesResponse> response) {
+                if (!isAdded()) return;
                 if (response.body().getData() != null) {
                     int count = response.body().getData().getTotalWarehouses();
                     addStatCard("Total Warehouses", String.valueOf(count), R.drawable.baseline_add_location_24);
                 } else {
-                    Toast.makeText(requireContext(), "Warehouses: No data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 requestCompleted();
             }
@@ -124,11 +126,12 @@ public class AdminDashboardFragment extends Fragment {
         apiService.getTotalMotorbikes().enqueue(new Callback<TotalMotorbikesResponse>() {
             @Override
             public void onResponse(Call<TotalMotorbikesResponse> call, Response<TotalMotorbikesResponse> response) {
+                if (!isAdded()) return;
                 if (response.body().getData() != null) {
                     int count = response.body().getData().getTotalMotorbikes();
                     addStatCard("Total Motorbikes", String.valueOf(count), R.drawable.outline_bike_scooter_24);
                 } else {
-                    Toast.makeText(requireContext(), "Motorbikes: No data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 requestCompleted();
             }
@@ -144,6 +147,7 @@ public class AdminDashboardFragment extends Fragment {
     // ============================ UI HELPERS ============================
 
     private void addStatCard(String title, String value, int iconRes) {
+        if (!isAdded()) return;
         View card = LayoutInflater.from(requireContext()).inflate(R.layout.item_dashboard_stat, cardContainer, false);
         TextView tvTitle = card.findViewById(R.id.tvTitle);
         TextView tvValue = card.findViewById(R.id.tvValue);
@@ -157,11 +161,20 @@ public class AdminDashboardFragment extends Fragment {
     }
 
 
-    // ============================ UTILITIES ============================
-
     private void showLoading(boolean show) {
+        if (!isAdded()) return;
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
         cardContainer.setVisibility(show ? View.GONE : View.VISIBLE);
         tvError.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // Hủy toàn bộ request đang chạy khi fragment bị hủy
+        for (Call<?> call : activeCalls) {
+            if (!call.isCanceled()) call.cancel();
+        }
+        activeCalls.clear();
     }
 }

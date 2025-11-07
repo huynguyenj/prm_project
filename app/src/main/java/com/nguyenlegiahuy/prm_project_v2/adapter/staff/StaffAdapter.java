@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -23,10 +24,18 @@ public class StaffAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private final Context context;
     private final List<Staff> staffList;
     private boolean isLoadingAdded = false;
+    private final OnStaffActionListener listener;
 
-    public StaffAdapter(Context context, List<Staff> staffList) {
+
+    public interface OnStaffActionListener {
+        void onUpdate(Staff staff);
+        void onDelete(Staff staff);
+    }
+
+    public StaffAdapter(Context context, List<Staff> staffList, OnStaffActionListener listener) {
         this.context = context;
         this.staffList = staffList;
+        this.listener = listener;
     }
 
     @Override
@@ -61,10 +70,8 @@ public class StaffAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                     staff.isActive() ? context.getColor(R.color.success) : context.getColor(R.color.error)
             );
 
-//            Glide.with(context)
-//                    .load(staff.getAvatar())
-//                    .placeholder(R.drawable.ic_user_placeholder)
-//                    .into(viewHolder.ivAvatar);
+            viewHolder.btnUpdate.setOnClickListener(v -> listener.onUpdate(staff));
+            viewHolder.btnDelete.setOnClickListener(v -> listener.onDelete(staff));
         }
     }
 
@@ -98,6 +105,7 @@ public class StaffAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     static class StaffViewHolder extends RecyclerView.ViewHolder {
         ImageView ivAvatar;
         TextView tvName, tvEmail, tvPhone, tvRole, tvStatus;
+        Button btnUpdate, btnDelete;
         StaffViewHolder(@NonNull View itemView) {
             super(itemView);
             ivAvatar = itemView.findViewById(R.id.ivAvatar);
@@ -105,6 +113,8 @@ public class StaffAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             tvEmail = itemView.findViewById(R.id.tvEmail);
             tvPhone = itemView.findViewById(R.id.tvPhone);
             tvStatus = itemView.findViewById(R.id.tvStatus);
+            btnUpdate = itemView.findViewById(R.id.btnUpdateStaff);
+            btnDelete = itemView.findViewById(R.id.btnDeleteStaff);
         }
     }
 
@@ -114,5 +124,9 @@ public class StaffAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             super(itemView);
             progressBar = itemView.findViewById(R.id.itemProgressBar);
         }
+    }
+    public void clear() {
+        staffList.clear();
+        notifyDataSetChanged();
     }
 }
